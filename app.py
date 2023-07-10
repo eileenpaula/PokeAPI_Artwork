@@ -1,5 +1,6 @@
-from flask import Flask
-app = Flask(__name__)                    # this gets the name of the file so Flask knows it's name
+from flask import Flask, render_template
+
+app = Flask(__name__)
 
 @app.route("/")                          # this tells you the URL the method below is related to
 def hello_world():
