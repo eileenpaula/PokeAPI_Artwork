@@ -1,0 +1,110 @@
+html, body {
+  height: 100%;
+  width: 100%;
+}
+ul {
+    display: inline-block;
+}
+
+/* ACCORDIAN CSS */
+.ia-container {
+  width: 600px;
+  margin: 20px auto;
+  overflow: hidden;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.08);
+  border: 7px solid rgba(255, 255, 255, 0.6);
+}
+
+/* ACCORDIAN CSS */
+.ia-container figure {
+  position: absolute;
+  top: 0;
+  left: 50px;
+  width: 500px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.6);
+  transition: all 0.3s ease-in-out;
+}
+
+/* ACCORDIAN CSS */
+.ia-container > figure {
+  position: relative;
+  left: 0 !important;
+}
+
+/* ACCORDIAN CSS */
+.ia-container img {
+  display: block;
+  width: 100%;
+}
+
+/* ACCORDIAN CSS */
+.ia-container input {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 50px; 
+	height: 100%;
+	cursor: pointer;
+	border: 0;
+	padding: 0;
+  opacity: 0;
+	z-index: 100;
+}
+
+/* ACCORDIAN CSS */
+.ia-container input:checked{
+	width: 5px;
+	left: auto;
+	right: 0px;
+}
+
+/* ACCORDIAN CSS */
+.ia-container input:checked ~ figure {
+    left: 500px;
+    transition: all 0.7s ease-in-out;
+}
+
+/* USER INPUT PAGE */ 
+h2, h3, a {
+	color: #34495e;
+}
+.logo {
+	font-size: 1.5em;
+}
+.main-nav a {
+	color: #34495e;
+	font-size: .99em;
+}
+.main-nav a:hover {
+	color: #718daa;
+}
+.logo a,
+.main-nav a {
+	padding: 10px 15px;
+	text-transform: uppercase;
+	text-align: center;
+	display: block;
+}
+#message {
+  color: red;
+  padding-left: 5vw;
+}
+.contact-container {
+  height: 65vh;
+  width: 100%;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-left: 5vw;
+}
+
+#message-aw {
+  color: red;
+  padding-left: 5vw;
+}
+.contact-container-aw {
+  height: 65vh;
+  width: 100%;
+}
