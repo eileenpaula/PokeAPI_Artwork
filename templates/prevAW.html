@@ -5,10 +5,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>PokePic</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css" />
   <script src="https://use.fontawesome.com/5cd833ef09.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-  <script src="prevAWScript.js" type="text/javascript" defer></script>
+  <script src="{{ url_for('static', filename='prevAWScript.js') }}" type="text/javascript" defer></script>
 </head>
 
 <!-- HEADING -->
@@ -41,7 +41,7 @@
             </div>
           </div>
         </div>
-        <br><br><p class="subtitle">To return to home page <a href="index.html">Click here</a></p>
+        <br><br><p class="subtitle">To return to home page <a href="/index">Click here</a></p>
   </section>
     </div>
   </div>

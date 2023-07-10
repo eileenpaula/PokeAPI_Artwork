@@ -5,10 +5,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>PokePic</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css" />
   <script src="https://use.fontawesome.com/5cd833ef09.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-  <script src="script.js" type="text/javascript" defer></script>
+  <script src="{{ url_for('static', filename='script.js') }}" type="text/javascript" defer></script>
 </head>
 
 <body>
@@ -42,7 +42,8 @@
             </div>
           </div>
         </div>
-        <br><br><br><p class="subtitle">To view previously generated artwork <a href="prevAW.html">Click here</a></p>
+        <br><br><br>
+        <p class="subtitle">To view previously generated artwork <a href="/prevAW">Click here</a></p>
       </section>
     </div>
   </div>
