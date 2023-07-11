@@ -9,7 +9,7 @@ const pokeInput=document.querySelector('#poke-input');
 const button=document.querySelector('.btn');
 const message=document.querySelector('#message');
 
-
+/*
 button.addEventListener('click', (e) => {
   let poke = true;
   
@@ -26,7 +26,7 @@ button.addEventListener('click', (e) => {
     resetBtn.classList.remove("is-hidden");
     document.getElementById("img1").click();
   }
-});
+});*/
 
 resetBtn.addEventListener('click', (e) => {
   input.classList.remove("is-hidden");
@@ -34,3 +34,33 @@ resetBtn.addEventListener('click', (e) => {
   resetBtn.classList.add("is-hidden");
 });
 
+document.querySelector("#search").addEventListener("click", getPokemon);
+
+function lowerCaseName(string) {
+  return string.toLowerCase();
+}
+
+function getPokemon(e) {
+  const name = document.querySelector("#poke-input").value;
+  const pokemonName = lowerCaseName(name);
+
+  if(pokemonName == ""){
+    message.textContent = "You have yet to enter a Pokemon name";
+  }else{
+    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
+      .then((response) => response.json())
+      .then((data) => {
+        pokeInput.value = "";
+        message.textContent = "";
+        input.classList.add("is-hidden");
+        images.classList.remove("is-hidden");
+        resetBtn.classList.remove("is-hidden");
+        document.getElementById("img1").click();
+      })
+      .catch((err) => {
+        message.textContent = "Pokemon not found";
+      });
+
+    e.preventDefault();
+  }
+}
