@@ -32,26 +32,18 @@
           Generate artwork based on a Pokémon of your choosing! Please enter the name of a Pokémon:
         </p>
         <p id="message"></p>
-        <!-- <div class="form">
-          <div >
-            <input id="poke-input" type="text" autofocus placeholder="Pokemon name" />
+
+        <form method="POST" action="">
+          <div class="searchBox">
+            <input id="poke-input" name="poke-input" type="text" autofocus placeholder="Pokemon name"/>
           </div>
+          <br>
           <div class="inlineForm">
             <div>
-              <button class="btn" type="submit">Submit</button>
+              <button class="btn" id="search" type="submit">Submit</button>
             </div>
           </div>
-        </div>-->
-
-        <div class="searchBox">
-          <input id="poke-input" type="text" autofocus placeholder="Pokemon name"/>
-        </div>
-        <br>
-        <div class="inlineForm">
-          <div>
-            <button class="btn" id="search" type="submit">Submit</button>
-          </div>
-        </div>
+        </form>
 
         <br><br><br>
         <p class="subtitle">To view previously generated artwork <a href="/prevAW">Click here</a></p>

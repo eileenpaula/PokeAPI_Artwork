@@ -14,7 +14,7 @@ favorite_language = os.environ['LANGUAGE']
 #openai.api_key = 'API_KEY_OPENAI'
 
 def generate_art():
-    openai.api_key = "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"
+    openai.api_key = "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"
     url = "https://pokeapi.co/api/v2/pokemon/"
     error = "Invalid Pokemon name!"
     pokemon_dict = {}

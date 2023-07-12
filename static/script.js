@@ -6,7 +6,6 @@ const images = document.querySelector('.ia-container');
 const resetBtn = document.querySelector('.reset')
 
 const pokeInput=document.querySelector('#poke-input');
-const button=document.querySelector('.btn');
 const message=document.querySelector('#message');
 
 resetBtn.addEventListener('click', (e) => {
@@ -15,7 +14,7 @@ resetBtn.addEventListener('click', (e) => {
   resetBtn.classList.add("is-hidden");
 });
 
-document.querySelector("#search").addEventListener("click", getPokemon);
+//document.querySelector("#search").addEventListener("click", getPokemon);
 
 function lowerCaseName(string) {
   return string.toLowerCase();
