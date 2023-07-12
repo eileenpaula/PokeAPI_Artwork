@@ -47,11 +47,24 @@
   </div>
   </section>
   
-<!-- ROWS -->
+<!--  
 <div class="columns is-centered is-variable is-5 is-hidden">
-      <!-- COLUMN 1 -->
       <div class="column is-one-quarter">
-        <!-- CARD -->
+        <div class="card">
+          <div class="card-image">
+            <figure class="image">
+              <img src="https://i.ibb.co/fCpPsn1/pc.jpg" alt="pc" border="0">
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="content">
+              <p class="title is-4">Pikachu</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="column is-one-quarter">
         <div class="card">
           <div class="card-image">
             <figure class="image">
@@ -66,26 +79,7 @@
         </div>
       </div>
 
-      <!-- COLUMN 2 -->
       <div class="column is-one-quarter">
-        <!-- CARD -->
-        <div class="card">
-          <div class="card-image">
-            <figure class="image">
-              <img src="https://i.ibb.co/fCpPsn1/pc.jpg" alt="pc" border="0">
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="content">
-              <p class="title is-4">Pikachu</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- COLUMN 3 -->
-      <div class="column is-one-quarter">
-        <!-- CARD -->
         <div class="card">
           <div class="card-image">
             <figure class="image">
@@ -100,6 +94,13 @@
         </div>
       </div>
     </div>
-  <br><br>
-  
+  <br><br> -->
+  <tbody>
+    {% for record in data %}
+        <tr>
+            <td>{{ record.pokemon }}</td>
+            <td><img src="{{ record.urls }}"></td>
+        </tr>
+    {% endfor %}
+</tbody>
 </html>

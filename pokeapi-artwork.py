@@ -11,10 +11,10 @@ import os
 load_dotenv()
 favorite_language = os.environ['LANGUAGE']
 
-openai.api_key = 'API_KEY_OPENAI'
+#openai.api_key = 'API_KEY_OPENAI'
 
 def generate_art():
-    #openai.api_key = "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"
+    openai.api_key = "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"
     url = "https://pokeapi.co/api/v2/pokemon/"
     error = "Invalid Pokemon name!"
     pokemon_dict = {}
