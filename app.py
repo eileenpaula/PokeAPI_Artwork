@@ -36,6 +36,10 @@ def prevAW():
 
     return render_template('prevAW.html', data=df.to_dict(orient='records'))
     #return render_template('/prevAW.html')
+'''
+class Images(db.Model):
+    pokemon_name = db.Column(db.String, nullable=False)
+    image_url = db.Column(db.String, nullable=False)'''
 
 if __name__ == '__main__':            
     app.run(debug=True, host="0.0.0.0")
