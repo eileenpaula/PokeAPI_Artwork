@@ -11,7 +11,7 @@ import requests
 
 app = Flask(__name__)
 
-openai.api_key = "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"
+openai.api_key = ""
 
 # Creating Database and Table
 engine = db.create_engine('sqlite:///data_base_name.sqlite') #Create data_base_name.sqlite automatically
@@ -70,6 +70,7 @@ def index():
 
     print(request.form)
     return render_template('index.html', message = m, user_input_class = user_input_class, img_class = img_class, reset_class = reset_class, img_url = img_url)
+    #class names not working
 
 @app.route('/testing', methods=['GET', 'POST'])
 def testing(): 
