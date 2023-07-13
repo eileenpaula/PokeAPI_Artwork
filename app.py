@@ -89,7 +89,20 @@ def testing():
 
 @app.route('/prevAW')
 def prevAW():
-    return render_template('prevAW.html')
+    with engine.connect() as connection:
+        query = db.select(emp)
+        query_result = connection.execute(query)
+        rows = query_result.fetchall()
+
+    pokemon_data = []
+    for row in rows:
+        pokemon = {
+            'name': row['pokemon'],
+            'url': row['url']
+        }
+        pokemon_data.append(pokemon)
+    
+    return render_template('prevAW.html', pokemon_data=pokemon_data)
 
 if __name__ == '__main__':            
     app.run(debug=True, host="0.0.0.0")
