@@ -11,7 +11,7 @@ engine = db.create_engine('sqlite:///data_base_name.sqlite') #Create data_base_n
 connection = engine.connect()
 metadata = db.MetaData()
 
-# Json.dumps(arr)
+# Json.dumps(arr), blob
 emp = db.Table('emp', metadata,
               db.Column('pokemon', db.String()),
               db.Column('url', db.String(), nullable=False)
@@ -22,12 +22,12 @@ metadata.create_all(engine) #Creates the table
 print("table created")
 
 @app.route('/', methods=['GET', 'POST'])
-def index():    
-    print(request.form)
+def index(): 
     if request.method == 'POST':
         poke_search = request.form.get('poke-input')
+        
         with engine.connect() as connection:
-            data = {"pokemon":"this works", "url":"N/A"}
+            data = {"pokemon":poke_search, "url":"N/A"}
             connection.execute(emp.insert(), data)
 
     
@@ -43,14 +43,9 @@ def testing():
         print(rows)
     return "Hello World!"
 
-'''
 @app.route('/prevAW')
 def prevAW():
-    engine = db.create_engine('sqlite:///data_base_name.db')
-    connection = engine.connect()
-    query_result = connection.execute(db.text("SELECT pokemon, urls FROM table_name;")).fetchall()
-    df = pd.DataFrame(query_result, columns=['pokemon', 'urls'])
-    return render_template('prevAW.html', data=df.to_dict(orient='records'))'''
+    return render_template('prevAW.html')
 
 if __name__ == '__main__':            
     app.run(debug=True, host="0.0.0.0")
