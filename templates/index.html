@@ -21,7 +21,7 @@
 
   <!-- USER INPUT -->
   <section class="">
-    <div class="contact-container">
+    <div class= {{user_input_class}}>
     <script src=
 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/js/all.min.js'>
     </script>
@@ -31,7 +31,7 @@
         <p class="subtitle">
           Generate artwork based on a Pokémon of your choosing! Please enter the name of a Pokémon:
         </p>
-        <p id="message"></p>
+        <p id="message">{{message}}</p>
 
         <form method="POST" action="">
           <div class="searchBox">
@@ -54,25 +54,25 @@
 
   <!-- ACCORDIAN EFFECT -->
   <section class="">
-    <div class="ia-container is-hidden">
+    <div class={{img_class}}>
     	<figure>
-    	 <img src="http://www.italytravelandlife.com/wp-content/uploads/2018/11/LagoDiBarreaAbruzzo%C2%A9GettyImages.jpg" alt="image01" />
+    	 <img src={{img_url}} alt="image01" />
     	 <input id="img1" type="radio" name="radio-set" checked="checked" />
-    	 <figure>
+    	 <!--<figure>
     		<img src="https://cdn.britannica.com/46/76246-050-CEFCAD38/Denali-Alaska.jpg" alt="image02" />
     		<input type="radio" name="radio-set" />
     	  <figure>
     		  <img src="https://assets.vogue.com/photos/5ab1a0294650d478d14aba58/master/w_2560%2Cc_limit/00-story-image-anguilla-island-travel-guide.jpg" alt="image03" />
     		  <input type="radio" name="radio-set" />
     	  </figure>
-    	 </figure>
+    	 </figure>-->
       </figure>
     </div>
   </section>
 
   <!-- BUTTON -->
   <section class="">
-    <div class='reset has-text-centered is-hidden'>
+    <div class={{reset_class}}>
       <div class='columns is-mobile is-centered'>
         <div class='column is-5'>
           <button class="button has-text-dark is-info is-light is-rounded">
