@@ -6,7 +6,6 @@ import openai
 import json
 import os
 from dotenv.main import load_dotenv
-import os
 
 load_dotenv()
 favorite_language = os.environ['LANGUAGE']
