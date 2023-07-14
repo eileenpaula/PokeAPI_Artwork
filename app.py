@@ -92,7 +92,26 @@ def index():
                     data = {"pokemon":poke_search, "url":image_url3}
                     connection.execute(emp.insert(), data)
 
-    return render_template('index.html', message = m, user_input_class = user_input_class, img_class = img_class, reset_class = reset_class, img_url1 = img_url1, img_url2 = img_url2, img_url3 = img_url3)
+    with engine.connect() as connection:
+        query = db.select(emp)
+        query_result = connection.execute(query)
+        rows = query_result.fetchall()
+
+    pokemon_dict = {}
+    for row in rows:
+        val = row['pokemon']
+        try:
+            pokemon_dict[val] += 1
+        except:
+            pokemon_dict[val] = 1
+                
+    sorted_dict = sorted(pokemon_dict.items(), key=lambda x: x[1], reverse=True)
+    top_five = sorted_dict[:5]
+    print(top_five)
+
+    return render_template('index.html', message = m, user_input_class = user_input_class, 
+    img_class = img_class, reset_class = reset_class, img_url1 = img_url1, img_url2 = img_url2, 
+    img_url3 = img_url3, top_five = top_five)
     #class names not working
 
 @app.route('/testing', methods=['GET', 'POST'])
@@ -112,14 +131,6 @@ def testing():
 
 @app.route('/prevAW')
 def prevAW():
-    '''
-    query = db.select([emp]).order_by(db.desc(emp.columns.pokemon))
-
-    with engine.connect() as connection:
-        query = db.select(emp)
-        query_result = connection.execute(query)
-        rows = query_result.fetchall()'''
-
     query = db.select([emp]).order_by(db.asc(emp.columns.pokemon))
 
     with engine.connect() as connection:
@@ -135,6 +146,7 @@ def prevAW():
         pokemon_data.append(pokemon)
     
     return render_template('prevAW.html', pokemon_data=pokemon_data)
+
 
 if __name__ == '__main__':            
     app.run(debug=True, host="0.0.0.0")

@@ -49,6 +49,28 @@
         <p class="subtitle">To view previously generated artwork <a href="/prevAW">Click here</a></p>
       </section>
     </div>
+    <div class="leadership-board">
+        <h3 class="title lb">Leadership Board</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Name</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for index in range(top_five|length) %}
+              {% set pokemon = top_five[index] %}
+              <tr>
+                <td>{{ index + 1 }}</td>
+                <td>{{ pokemon[0] }}</td>
+                <td>{{ pokemon[1] }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div>
   </div>
   </section>
 
@@ -82,6 +104,6 @@
       </div>
     </div>
   </section>  
-  
+
 </body>
 </html>
