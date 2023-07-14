@@ -19,25 +19,28 @@
   
 
   <!-- GALLERY -->
-<div class="columns is-centered is-variable is-5">
-  {% for pokemon in json_data %}
-  <div class="column is-one-quarter">
-    <div class="card">
-      <div class="card-image">
-        <figure class="image">
-          <img src="{{ pokemon.url }}" alt="{{ pokemon.name }}">
-        </figure>
-      </div>
-      <div class="card-content">
-        <div class="content">
-          <p class="title is-4">{{ pokemon.name }}</p>
+  <div class="columns is-centered is-variable is-5">
+    {% for pokemon in pokemon_data %}
+    <div class="column is-one-third">
+      <div class="card">
+        <div class="card-image">
+          <figure class="image">
+            <img src="{{ pokemon['url'] }}" alt="{{ pokemon['name'] }}">
+          </figure>
+        </div>
+        <div class="card-content">
+          <div class="content">
+            <p class="title is-4">{{ pokemon['name'] }}</p>
+          </div>
         </div>
       </div>
     </div>
+    {% if loop.index % 3 == 0 %}
+      </div><div class="columns is-centered is-variable is-5">
+    {% endif %}
+    {% endfor %}
   </div>
-  {% endfor %}
-</div>
-  
+
 <!-- GALLERY 
 <div class="columns is-centered is-variable is-5">
       <div class="column is-one-quarter">
