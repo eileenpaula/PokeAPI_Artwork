@@ -5,6 +5,7 @@ import pandas as pd
 import json
 
 import sqlalchemy as db
+from sqlalchemy import select, asc
 
 import os
 import openai
@@ -31,13 +32,16 @@ metadata.create_all(engine) #Creates the table
 #query = query.where(emp.columns.pokemon != "N/A")
 #results = connection.execute(query)
 
+
 @app.route('/', methods=['GET', 'POST'])
 def index(): 
     m = ""
     user_input_class = "contact-container"
     img_class = "ia-container is-hidden"
     reset_class = "reset has-text-centered is-hidden"
-    img_url=""
+    img_url1=""
+    img_url2=""
+    img_url3=""
     if request.method == 'POST':
         poke_search = request.form.get('poke-input')
         poke_search = poke_search.lower() # ensures that user input in lowercase
@@ -59,20 +63,36 @@ def index():
                     n=1,
                     size="1024x1024"
                     )
-                image_url = response['data'][0]['url']
-                print(image_url)
+                image_url1 = response['data'][0]['url']
+                response = openai.Image.create(
+                    prompt=desc,
+                    n=1,
+                    size="1024x1024"
+                    )
+                image_url2 = response['data'][0]['url']
+                response = openai.Image.create(
+                    prompt=desc,
+                    n=1,
+                    size="1024x1024"
+                    )
+                image_url3 = response['data'][0]['url']
 
                 user_input_class += " is-hidden"
                 img_class = "ia-container"
                 reset_class = "reset has-text-centered"
-                img_url = image_url
+                img_url1 = image_url1
+                img_url2 = image_url2
+                img_url3 = image_url3
 
                 with engine.connect() as connection:
-                    data = {"pokemon":poke_search, "url":image_url}
+                    data = {"pokemon":poke_search, "url":image_url1}
+                    connection.execute(emp.insert(), data)
+                    data = {"pokemon":poke_search, "url":image_url2}
+                    connection.execute(emp.insert(), data)
+                    data = {"pokemon":poke_search, "url":image_url3}
                     connection.execute(emp.insert(), data)
 
-    print(request.form)
-    return render_template('index.html', message = m, user_input_class = user_input_class, img_class = img_class, reset_class = reset_class, img_url = img_url)
+    return render_template('index.html', message = m, user_input_class = user_input_class, img_class = img_class, reset_class = reset_class, img_url1 = img_url1, img_url2 = img_url2, img_url3 = img_url3)
     #class names not working
 
 @app.route('/testing', methods=['GET', 'POST'])
@@ -92,8 +112,17 @@ def testing():
 
 @app.route('/prevAW')
 def prevAW():
+    '''
+    query = db.select([emp]).order_by(db.desc(emp.columns.pokemon))
+
     with engine.connect() as connection:
         query = db.select(emp)
+        query_result = connection.execute(query)
+        rows = query_result.fetchall()'''
+
+    query = db.select([emp]).order_by(db.asc(emp.columns.pokemon))
+
+    with engine.connect() as connection:
         query_result = connection.execute(query)
         rows = query_result.fetchall()
 
@@ -104,8 +133,6 @@ def prevAW():
             'url': row['url']
         }
         pokemon_data.append(pokemon)
-    
-    print(pokemon_data)
     
     return render_template('prevAW.html', pokemon_data=pokemon_data)
 

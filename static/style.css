@@ -114,3 +114,13 @@ h2, h3, a {
   height: 65vh;
   width: 100%;
 }
+.columns{
+  padding: 5% 5%;
+}
+.st_class{
+  padding-top: 5%;
+  text-align: center;
+}
+.images {
+  padding-top: 5%;
+}
