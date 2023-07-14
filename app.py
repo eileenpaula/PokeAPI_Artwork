@@ -3,6 +3,7 @@ from flask import Flask, render_template, url_for, flash, redirect, request
 from flask_sqlalchemy import SQLAlchemy
 import pandas as pd
 import json
+import random
 
 import sqlalchemy as db
 from sqlalchemy import select, asc
@@ -32,6 +33,16 @@ metadata.create_all(engine) #Creates the table
 #query = query.where(emp.columns.pokemon != "N/A")
 #results = connection.execute(query)
 
+def get_random_pokemon():
+    # Make a GET request to retrieve a list of all Pokémon
+    response = requests.get('https://pokeapi.co/api/v2/pokemon?limit=1000')
+    if response.status_code == 200:
+        pokemon_list = response.json()['results']
+        # Select a random Pokémon from the list
+        random_pokemon = random.choice(pokemon_list)
+        return random_pokemon['name']
+    else:
+        print('Error:', response.status_code)
 
 @app.route('/', methods=['GET', 'POST'])
 def index(): 
@@ -42,14 +53,22 @@ def index():
     img_url1=""
     img_url2=""
     img_url3=""
+    poke_search=""
+    submit = True
     if request.method == 'POST':
-        poke_search = request.form.get('poke-input')
+        try: 
+            if request.form['submit_button'] == 'Random':
+                poke_search = get_random_pokemon()
+                submit = False
+                print(poke_search)
+        except:
+            poke_search = request.form.get('poke-input')
         poke_search = poke_search.lower() # ensures that user input in lowercase
-        if not poke_search: #this is where validation
+        if submit and not poke_search: #this is where validation
             m = "Please enter a Pokemon name." #if the user doesn't type anything, this will tell them to do so.
         #elif any(char.isdigit(_) for char in poke_search):
-        elif not poke_search.isalpha():
-            m = "Input should not contain numbers. Please enter a Pokemon name." #if they type numbers, it will ask them to enter a name instead        
+        elif submit and not poke_search.isalpha():
+            m = "Pokemon name should contain only letters. Try again." #if they type numbers, it will ask them to enter a name instead        
         else:
             try:
                 response = requests.get("https://pokeapi.co/api/v2/pokemon/" + poke_search).json()
@@ -91,7 +110,7 @@ def index():
                     connection.execute(emp.insert(), data)
                     data = {"pokemon":poke_search, "url":image_url3}
                     connection.execute(emp.insert(), data)
-
+        
     with engine.connect() as connection:
         query = db.select(emp)
         query_result = connection.execute(query)
@@ -107,12 +126,10 @@ def index():
                 
     sorted_dict = sorted(pokemon_dict.items(), key=lambda x: x[1], reverse=True)
     top_five = sorted_dict[:5]
-    print(top_five)
 
     return render_template('index.html', message = m, user_input_class = user_input_class, 
     img_class = img_class, reset_class = reset_class, img_url1 = img_url1, img_url2 = img_url2, 
-    img_url3 = img_url3, top_five = top_five)
-    #class names not working
+    img_url3 = img_url3, top_five = top_five, name = poke_search)
 
 @app.route('/testing', methods=['GET', 'POST'])
 def testing(): 
@@ -129,8 +146,8 @@ def testing():
     print(json_data)
     return "Hello World!"
 
-@app.route('/prevAW')
-def prevAW():
+@app.route('/gallery')
+def gallery():
     query = db.select([emp]).order_by(db.asc(emp.columns.pokemon))
 
     with engine.connect() as connection:
@@ -145,7 +162,7 @@ def prevAW():
         }
         pokemon_data.append(pokemon)
     
-    return render_template('prevAW.html', pokemon_data=pokemon_data)
+    return render_template('gallery.html', pokemon_data=pokemon_data)
 
 
 if __name__ == '__main__':            

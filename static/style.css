@@ -151,3 +151,24 @@ tbody tr:nth-child(even) {
 .lb {
   text-align: center;
 }
+
+.top {
+  position: fixed;
+  right: 3rem;
+  bottom: 3rem;
+  background-color: rgb(9, 72, 165); 
+  color: white; 
+  cursor: pointer; 
+  padding: 10px; 
+  border-radius: 2rem; 
+  font-size: 18px; 
+}
+
+.img_name {
+  text-align: center;
+  padding: 3%;
+}
+
+.rand_btn {
+  margin-left: 5%;
+}
