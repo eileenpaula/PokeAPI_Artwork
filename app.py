@@ -100,7 +100,7 @@ def prevAW():
     for row in rows:
         pokemon = {
             'name': row['pokemon'],
-            'url': row['url']
+            'url': repr(row['url'])
         }
         pokemon_data.append(pokemon)
 
