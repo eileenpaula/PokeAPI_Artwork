@@ -9,6 +9,7 @@ import os
 import openai
 import requests
 
+
 app = Flask(__name__)
 
 openai.api_key = ""
@@ -18,7 +19,6 @@ engine = db.create_engine('sqlite:///data_base_name.sqlite') #Create data_base_n
 connection = engine.connect()
 metadata = db.MetaData()
 
-# Json.dumps(arr), blob
 emp = db.Table('emp', metadata,
               db.Column('pokemon', db.String()),
               db.Column('url', db.String(), nullable=False)
@@ -26,7 +26,9 @@ emp = db.Table('emp', metadata,
 
 metadata.create_all(engine) #Creates the table
 
-print("table created")
+# query = db.delete(emp)
+# query = query.where(emp.columns.url == "N/A")
+# results = connection.execute(query)
 
 @app.route('/', methods=['GET', 'POST'])
 def index(): 
@@ -101,8 +103,30 @@ def prevAW():
             'url': row['url']
         }
         pokemon_data.append(pokemon)
+
     
-    return render_template('prevAW.html', pokemon_data=pokemon_data)
+    json_data = json.dumps(pokemon_data)
+    print(json_data)
+
+    return render_template('prevAW.html', json_data=json_data)
+
+
+# @app.route('/prevAW')
+# def prevAW():
+#     with engine.connect() as connection:
+#         query = db.select(emp)
+#         query_result = connection.execute(query)
+#         rows = query_result.fetchall()
+
+#     pokemon_data = []
+#     for row in rows:
+#         pokemon = {
+#             'name': row['pokemon'],
+#             'url': row['url']
+#         }
+#         pokemon_data.append(pokemon)
+    
+#     return render_template('prevAW.html', pokemon_data=pokemon_data)
 
 if __name__ == '__main__':            
     app.run(debug=True, host="0.0.0.0")
